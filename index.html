@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Ghibli Art Converter</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; padding: 20px; }
+        #image-container { margin-top: 20px; }
+        img { max-width: 100%; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); }
+        button { padding: 10px 20px; font-size: 16px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Studio Ghibli Art Converter</h1>
+    <p>Upload an image and apply a Ghibli-style effect.</p>
+    <input type="file" id="upload" accept="image/*">
+    <button onclick="applyGhibliFilter()">Apply Ghibli Style</button>
+    <div id="image-container"></div>
+
+    <script>
+        function applyGhibliFilter() {
+            const upload = document.getElementById('upload').files[0];
+            if (!upload) { alert('Please upload an image first!'); return; }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = document.createElement("img");
+                img.src = event.target.result;
+                img.style.filter = "contrast(1.2) saturate(1.5) brightness(1.1)";
+                document.getElementById("image-container").innerHTML = "";
+                document.getElementById("image-container").appendChild(img);
+            };
+            reader.readAsDataURL(upload);
+        }
+    </script>
+</body>
+</html>
